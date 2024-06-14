@@ -59,11 +59,11 @@ jobs:
 
 
 #DEPENDABOT
-  dependabot-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Dependabot
-        uses: dependabot/fetch-metadata@v1
+  # dependabot-check:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Run Dependabot
+  #       uses: dependabot/fetch-metadata@v1
 
 
 #BUILD
