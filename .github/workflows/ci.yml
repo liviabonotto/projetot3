@@ -52,14 +52,6 @@ jobs:
           path: test\lifecycle.test.js
 
 
-#DEPENDABOT
-  # dependabot-check:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Run Dependabot
-  #       uses: dependabot/fetch-metadata@v1
-
-
 #BUILD
   build-application:
     needs: run-tests
