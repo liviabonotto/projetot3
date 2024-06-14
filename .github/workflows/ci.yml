@@ -15,28 +15,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+
+#DEPENDENCIAS
   install-dependencies:
     needs: checkout-code
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm new
-
-  run-tests:
-    needs: checkout-code
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install dependencies
         run: npm install
 
+
+#TESTES
+  run-tests:
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
       - name: Run tests
         run: npm test
+
 
   upload-test-results:
     needs: run-tests
@@ -55,4 +55,28 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: incorrect-path/test-results
+          path: test\lifecycle.test.js
+
+
+#DEPENDABOT
+  dependabot-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Dependabot
+        uses: dependabot/fetch-metadata@v1
+
+
+#BUILD
+  build-application:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build application
+        run: npm run build 
+
+#PACKAGES
+verify-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify packages
+        run: npm audit  
